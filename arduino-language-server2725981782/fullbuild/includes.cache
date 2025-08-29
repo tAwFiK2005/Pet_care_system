@@ -1,0 +1,147 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\cores\\esp32"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\variants\\esp32"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Temp\\arduino-language-server2725981782\\fullbuild\\sketch\\sketch_aug29a.ino.cpp",
+    "Include": "HX711.h",
+    "Includepath": "c:\\Users\\Cool\\Documents\\Arduino\\libraries\\HX711"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Temp\\arduino-language-server2725981782\\fullbuild\\sketch\\sketch_aug29a.ino.cpp",
+    "Include": "ESP32Servo.h",
+    "Includepath": "c:\\Users\\Cool\\Documents\\Arduino\\libraries\\ESP32Servo\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Temp\\arduino-language-server2725981782\\fullbuild\\sketch\\sketch_aug29a.ino.cpp",
+    "Include": "WiFi.h",
+    "Includepath": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Temp\\arduino-language-server2725981782\\fullbuild\\sketch\\sketch_aug29a.ino.cpp",
+    "Include": "Network.h",
+    "Includepath": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\Network\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Temp\\arduino-language-server2725981782\\fullbuild\\sketch\\sketch_aug29a.ino.cpp",
+    "Include": "WiFiClientSecure.h",
+    "Includepath": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\NetworkClientSecure\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Temp\\arduino-language-server2725981782\\fullbuild\\sketch\\sketch_aug29a.ino.cpp",
+    "Include": "PubSubClient.h",
+    "Includepath": "c:\\Users\\Cool\\Documents\\Arduino\\libraries\\PubSubClient\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Temp\\arduino-language-server2725981782\\fullbuild\\sketch\\sketch_aug29a.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\Cool\\Documents\\Arduino\\libraries\\HX711\\HX711.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\Cool\\Documents\\Arduino\\libraries\\ESP32Servo\\src\\ESP32PWM.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\Cool\\Documents\\Arduino\\libraries\\ESP32Servo\\src\\ESP32Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\AP.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\STA.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\WiFi.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\WiFiAP.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\WiFiGeneric.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\WiFiMulti.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\WiFiSTA.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\WiFi\\src\\WiFiScan.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\Network\\src\\NetworkClient.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\Network\\src\\NetworkEvents.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\Network\\src\\NetworkInterface.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\Network\\src\\NetworkManager.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\Network\\src\\NetworkServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\Network\\src\\NetworkUdp.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\NetworkClientSecure\\src\\NetworkClientSecure.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Cool\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.0\\libraries\\NetworkClientSecure\\src\\ssl_client.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\Cool\\Documents\\Arduino\\libraries\\PubSubClient\\src\\PubSubClient.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]
