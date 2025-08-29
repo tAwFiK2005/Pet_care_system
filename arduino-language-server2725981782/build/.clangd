@@ -1,4 +1,0 @@
-Diagnostics:
-  Suppress: [anon_bitfield_qualifiers]
-CompileFlags:
-  Add: -ferror-limit=0
