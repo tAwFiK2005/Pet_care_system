@@ -19,7 +19,9 @@ const char* mqttPassword = "PTI3f1Cq6bH?$lE!vs.2";
 
 // Topics
 const char* TOPIC_CMD = "pet/feeder/food/command"; // SETTINGS:MEALS=4;PORTION=50;WATER=10
-const char* TOPIC_TIME = "time";                   // HH:MM:SS
+const char* TOPIC_WEIGHT = "pet/feeder/food/weight";
+const char* TOPIC_WATER  = "pet/feeder/water/level";
+
 
 WiFiClientSecure espClient;
 PubSubClient client(espClient);
@@ -169,22 +171,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   String t = String(topic);
 
-  if (t == TOPIC_TIME || t == "time") {
-    int h, m, s;
-    if (sscanf(msg.c_str(), "%d:%d:%d", &h, &m, &s) == 3) {
-      // sanity
-      if (h < 0) h = 0; if (h > 23) h = 0;
-      if (m < 0) m = 0; if (m > 59) m = 0;
-      if (s < 0) s = 0; if (s > 59) s = 0;
-      lastStartSeconds = h * 3600 + m * 60 + s;
-      Serial.printf("⏱ Received start time: %02d:%02d:%02d -> startSec=%d\n", h, m, s, lastStartSeconds);
-      // Compute slots based on this start time and current MEALS_PER_DAY
-      computeSlotsFromStart(lastStartSeconds);
-    } else {
-      Serial.println("❌ Invalid time format; expected HH:MM:SS");
-    }
-  }
-  else if (t == TOPIC_CMD) {
+  if (t == TOPIC_CMD) {
     // SETTINGS payload
     parseSettings(msg);
   } else {
@@ -311,6 +298,10 @@ void loop() {
         if (scale.is_ready()) {
           float weight = scale.get_units(5)/2; // average 5 readings
           if (weight < 0) weight = 0;
+
+          char weightMsg[32];
+          snprintf(weightMsg, sizeof(weightMsg), "weight: %.2f", weight);
+          client.publish(TOPIC_WEIGHT, weightMsg);
           Serial.printf("⚖ Weight: %.2f g (Target: %.2f g)\n", weight, PORTION_WEIGHT);
 
           if (weight >= PORTION_WEIGHT) {
@@ -360,6 +351,9 @@ void loop() {
   int raw = analogRead(SENSOR_PIN);
   float percent = (raw * 2 * 100.0) / MAX_SENSOR_VALUE;
 
+  char waterMsg[32];
+  snprintf(waterMsg, sizeof(waterMsg), "Level: %.2f", percent);
+  client.publish(TOPIC_WATER, waterMsg);
   Serial.printf("RAW: %d   Level: %.2f%%\n", raw, percent);
 
   if (percent < LEVEL_THRESHOLD) {
