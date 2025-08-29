@@ -43,6 +43,7 @@ This project provides pet owners with **convenience, reliability, and peace of m
 - **[@tAwFiK2005](https://github.com/tAwFiK2005)** – Project Lead, Documentation and repository maintenance  
 - **[@Ahmed-Ayman-2825](https://github.com/Ahmed-Ayman-2825)** – Hardware setup, wiring, and testing  
 - **[@ashrafeesa](https://github.com/ashrafeesa)** – Flutter application 
-- **[@ahmedabdalwahab](https://github.com/ahmedabdalwahab)** – ESP32 programming, system integration, Sensor calibration, load cell & water level system  
+- **[@ahmedabdalwahab](https://github.com/ahmedabdalwahab)** – ESP32 programming, system integration, Sensor calibration, load cell & water level system
+- - **[@hazemsaeedkamel](https://github.com/hazemsaeedkamel)** – Data Flow & Data Integration
 
 ---
