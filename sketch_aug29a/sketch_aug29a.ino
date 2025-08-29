@@ -78,7 +78,7 @@ void computeSlotsFromStart(int startInSeconds) {
   // interval in seconds (even spacing)
   int interval = (24 * 3600) / MEALS_PER_DAY;
 
-  Serial.printf("🔄 Computing %d slots from start %02d:%02d:%02d (startSec=%d), interval=%d s\n",
+  Serial.printf("Computing %d slots from start %02d:%02d:%02d (startSec=%d), interval=%d s\n",
                 MEALS_PER_DAY,
                 startInSeconds / 3600, (startInSeconds % 3600) / 60, startInSeconds % 60,
                 startInSeconds, interval);
@@ -97,7 +97,7 @@ void computeSlotsFromStart(int startInSeconds) {
   // make sure currentSlot valid
   if (currentSlot >= MEALS_PER_DAY) currentSlot = 0;
 
-  Serial.println("✅ Slots:");
+  Serial.println("Slots:");
   for (int i = 0; i < MEALS_PER_DAY; ++i) {
     Serial.printf("   Slot[%d] = %02d:%02d:%02d\n", i, slotHour[i], slotMinute[i], slotSecond[i]);
   }
@@ -128,17 +128,17 @@ void parseSettings(String payload) {
       if (key == "MEALS") {
         int m = value.toInt();
         MEALS_PER_DAY = constrain(m, 1, 10);
-        Serial.printf("🔧 MEALS set to %d\n", MEALS_PER_DAY);
+        Serial.printf("MEALS set to %d\n", MEALS_PER_DAY);
 
       } else if (key == "PORTION") {
         float p = value.toFloat();
         PORTION_WEIGHT = constrain(p, 0.0f, 5000.0f);
-        Serial.printf("🔧 PORTION set to %.2f g\n", PORTION_WEIGHT);
+        Serial.printf("PORTION set to %.2f g\n", PORTION_WEIGHT);
 
       } else if (key == "WATER") {
         float w = value.toFloat();
         LEVEL_THRESHOLD = constrain(w, 0.0f, 100.0f);
-        Serial.printf("🔧 WATER threshold set to %.2f %%\n", LEVEL_THRESHOLD);
+        Serial.printf("WATER threshold set to %.2f %%\n", LEVEL_THRESHOLD);
 
       } else if (key == "FIRST_MEAL_TIME") {
         int h, m, sec;
@@ -147,12 +147,12 @@ void parseSettings(String payload) {
           m = constrain(m, 0, 59);
           sec = constrain(sec, 0, 59);
           lastStartSeconds = h * 3600 + m * 60 + sec;
-          Serial.printf("🔧 FIRST_MEAL_TIME set to %02d:%02d:%02d (%d sec)\n", h, m, sec, lastStartSeconds);
+          Serial.printf("FIRST_MEAL_TIME set to %02d:%02d:%02d (%d sec)\n", h, m, sec, lastStartSeconds);
         } else {
-          Serial.println("⚠ Invalid FIRST_MEAL_TIME format. Expected HH:MM:SS");
+          Serial.println("Invalid FIRST_MEAL_TIME format. Expected HH:MM:SS");
         }
       } else {
-        Serial.printf("⚠ Unknown SETTINGS key: %s\n", key.c_str());
+        Serial.printf("Unknown SETTINGS key: %s\n", key.c_str());
       }
     }
     start = end + 1;
@@ -167,7 +167,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   String msg;
   msg.reserve(length + 1);
   for (unsigned int i = 0; i < length; ++i) msg += (char)payload[i];
-  Serial.printf("📩 Received on [%s]: %s\n", topic, msg.c_str());
+  Serial.printf("Received on [%s]: %s\n", topic, msg.c_str());
 
   String t = String(topic);
 
@@ -175,7 +175,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     // SETTINGS payload
     parseSettings(msg);
   } else {
-    Serial.println("⚠ Unhandled topic");
+    Serial.println("Unhandled topic");
   }
 }
 
@@ -210,13 +210,13 @@ void setup() {
   Serial.print("Connecting to Wi-Fi");
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) { delay(200); Serial.print("."); }
-  Serial.print("\n✅ WiFi connected. IP: ");
+  Serial.print("\nWiFi connected. IP: ");
   Serial.println(WiFi.localIP());
   delay(1000);
 
   // NTP
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
-  Serial.println("🔄 NTP configured (time.google.com).");
+  Serial.println("NTP configured (time.google.com).");
 
   // MQTT
   espClient.setInsecure(); // for testing only — accepts any cert
@@ -256,7 +256,7 @@ void loop() {
   // Time read (5s timeout)
   struct tm timeinfo;
   if (!getLocalTime(&timeinfo, 5000)) {
-    Serial.println("❌ Failed to get time from NTP server (timeout).");
+    Serial.println("Failed to get time from NTP server (timeout).");
   } else {
     // day change detection (works even if we miss exact 00:00:00)
     if (lastRunDay == -1) {
@@ -264,18 +264,18 @@ void loop() {
     } else if (timeinfo.tm_mday != lastRunDay) {
       currentSlot = 0;
       lastRunDay = timeinfo.tm_mday;
-      Serial.println("🔄 New day detected — slot counter reset.");
+      Serial.println("New day detected — slot counter reset.");
     }
 
     // print time only when idle
     if (!targetActive) {
       if (currentSlot < MEALS_PER_DAY) {
-        Serial.printf("⏰ Now %02d:%02d:%02d | Waiting Slot[%d] at %02d:%02d:%02d\n",
+        Serial.printf("Now %02d:%02d:%02d | Waiting Slot[%d] at %02d:%02d:%02d\n",
                       timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec,
                       currentSlot,
                       slotHour[currentSlot], slotMinute[currentSlot], slotSecond[currentSlot]);
       } else {
-        Serial.println("⏸ All meals done for today.");
+        Serial.println("All meals done for today.");
       }
     }
 
@@ -284,7 +284,7 @@ void loop() {
       int nowSec = timeinfo.tm_hour * 3600 + timeinfo.tm_min * 60 + timeinfo.tm_sec;
       int slotSec = slotHour[currentSlot] * 3600 + slotMinute[currentSlot] * 60 + slotSecond[currentSlot];
       if (abs(nowSec - slotSec) <= 2) { // ±2s tolerance
-        Serial.printf("🎯 Slot %d started at %02d:%02d:%02d\n", currentSlot,
+        Serial.printf("Slot %d started at %02d:%02d:%02d\n", currentSlot,
                       timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
         targetActive = true;
         activeStart = millis();
@@ -302,7 +302,7 @@ void loop() {
           char weightMsg[32];
           snprintf(weightMsg, sizeof(weightMsg), "weight: %.2f", weight);
           client.publish(TOPIC_WEIGHT, weightMsg);
-          Serial.printf("⚖ Weight: %.2f g (Target: %.2f g)\n", weight, PORTION_WEIGHT);
+          Serial.printf("Weight: %.2f g (Target: %.2f g)\n", weight, PORTION_WEIGHT);
 
           if (weight >= PORTION_WEIGHT) {
             gateServo.write(0); // close gate
@@ -338,10 +338,10 @@ void loop() {
       } else {
         // end of slot
         targetActive = false;
-        Serial.printf("⏹ Slot %d finished\n", currentSlot);
+        Serial.printf("Slot %d finished\n", currentSlot);
         currentSlot++;
         if (currentSlot >= MEALS_PER_DAY) {
-          Serial.println("✅ All meals done for today");
+          Serial.println("All meals done for today");
         }
       }
     }
@@ -358,12 +358,12 @@ void loop() {
 
   if (percent < LEVEL_THRESHOLD) {
   digitalWrite(PUMP_PIN, HIGH);  // Pump ON
-  Serial.println("🚰 Pump ON (Water below threshold)");
+  Serial.println("Pump ON (Water below threshold)");
   lcd.setCursor(0, 0);
   lcd.print("water low");
   } else {
   digitalWrite(PUMP_PIN, LOW);   // Pump OFF
-  Serial.println("💧 Pump OFF (Water above threshold)");
+  Serial.println("Pump OFF (Water above threshold)");
   lcd.setCursor(0, 0);
   lcd.print("water high");
   }
