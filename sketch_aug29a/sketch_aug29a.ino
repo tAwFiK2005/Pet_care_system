@@ -54,6 +54,7 @@ float LEVEL_THRESHOLD = 15.0f; // percent (water pump ON when below threshold)
 // ---------- Runtime state ----------
 unsigned long buzzerStart = 0;
 bool buzzerActive = false;
+bool buzzerTriggered = false;
 bool gateClosed = false;
 
 int ldrThreshold = 2000;
@@ -294,7 +295,7 @@ void loop() {
     // active slot logic (5 minutes)
     if (targetActive) {
       unsigned long elapsed = millis() - activeStart;
-      if (elapsed <= 5UL * 60UL * 1000UL) { // 5 minutes
+      if (elapsed <= 30000UL) { // 5 minutes
         if (scale.is_ready()) {
           float weight = scale.get_units(5)/2; // average 5 readings
           if (weight < 0) weight = 0;
@@ -311,12 +312,14 @@ void loop() {
             lcd.setCursor(0, 1);
             lcd.print("weight reached");
 
-            if (!buzzerActive) {
-              buzzerActive = true;
-              buzzerStart = millis();
-              digitalWrite(BUZZER_PIN, HIGH);
-              Serial.println("Buzzer ON");
-            }
+            if (!buzzerActive && !buzzerTriggered) {
+            buzzerActive = true;
+            buzzerTriggered = true;  // mark buzzer as used for this slot
+            buzzerStart = millis();
+            digitalWrite(BUZZER_PIN, HIGH);
+            Serial.println("Buzzer ON");
+          }
+
           } else {
             gateServo.write(45); // open gate
             gateClosed = false;
@@ -329,7 +332,7 @@ void loop() {
         // buzzer auto-off conditions
         if (buzzerActive) {
           int ldrValue = analogRead(LDR_PIN);
-          if ((millis() - buzzerStart >= 120000) || (ldrValue < ldrThreshold)) {
+          if ((millis() - buzzerStart >= 10000) || (ldrValue < ldrThreshold)) {
             buzzerActive = false;
             digitalWrite(BUZZER_PIN, LOW);
             Serial.println("Buzzer OFF");
@@ -340,6 +343,8 @@ void loop() {
         targetActive = false;
         Serial.printf("Slot %d finished\n", currentSlot);
         currentSlot++;
+        buzzerTriggered = false; // reset for the next slot
+
         if (currentSlot >= MEALS_PER_DAY) {
           Serial.println("All meals done for today");
         }
